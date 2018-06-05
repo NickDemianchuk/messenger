@@ -9,7 +9,6 @@ public class Message {
     private Date created;
     private String author;
 
-
     public Message () {}
 
     public Message(long id, String message, String author) {
