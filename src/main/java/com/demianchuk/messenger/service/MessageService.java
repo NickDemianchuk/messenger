@@ -1,23 +1,44 @@
 package com.demianchuk.messenger.service;
 
+import com.demianchuk.messenger.database.DatabaseClass;
 import com.demianchuk.messenger.models.Message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MessageService {
 
+    private Map<Long, Message> messages = DatabaseClass.getMessages();
+
+
+    public MessageService() {
+        messages.put(1L, new Message(1L, "Hello World", "Mykola"));
+        messages.put(2L, new Message(2L, "Hello Jersey", "Mykola"));
+
+    }
     public List<Message> getAllMessages() {
+        return new ArrayList<>(messages.values());
+    }
 
-        Message m1 = new Message(1L, "Hello World!", "Mykola");
-        Message m2 = new Message(2L, "Hello Jersey!", "Mykola");
-        Message m3 = new Message(1L, "Hello REST!", "Mykola");
+    public Message getMessage(long id) {
+        return messages.get(id);
+    }
 
-        List<Message> list = new ArrayList<>();
-        list.add(m1);
-        list.add(m2);
-        list.add(m3);
+    public Message addMessage(Message message) {
+        message.setId(messages.size() + 1);
+        messages.put(message.getId(), message);
+        return message;
+    }
 
-        return list;
+    public Message updateMessage(Message message) {
+        if(message.getId() <= 0)
+            return null;
+        messages.put(message.getId(), message);
+        return message;
+    }
+
+    public Message removeMessage(long id) {
+        return messages.remove(id);
     }
 }
