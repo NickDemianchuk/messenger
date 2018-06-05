@@ -25,22 +25,26 @@ public class MessageResource {
         return messageService.getMessage(messageId);
     }
 
-//    @POST
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Message addMessage() {
-//        return messageService.addMessage(new Message(3L, "Hello Message", "Kolya"));
-//    }
-//
-//    @PUT
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Message updateMessage() {
-//        return messageService.updateMessage(new Message(1L, "HELLO WORLD!!!", "NICK"));
-//    }
-//
-//    @DELETE
-//    @Path("/{messageId}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Message removeMessage(@PathParam("messageId") long messageId) {
-//        return messageService.removeMessage(messageId);
-//    }
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Message addMessage(Message message) {
+        return messageService.addMessage(message);
+    }
+
+    @PUT
+    @Path("/{messageId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Message updateMessage(@PathParam("messageId") long messageId, Message message) {
+        message.setId(messageId);
+        return messageService.updateMessage(message);
+    }
+
+    @DELETE
+    @Path("/{messageId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Message removeMessage(@PathParam("messageId") long messageId) {
+        return messageService.removeMessage(messageId);
+    }
 }
