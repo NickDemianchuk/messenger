@@ -9,18 +9,20 @@ import java.util.Map;
 public class DatabaseClass {
 
     private static Map<Long, Message> messages = new HashMap<>();
-    private static Map<Long, Profile> profiles = new HashMap<>();
+    private static Map<String, Profile> profiles = new HashMap<>();
 
     static {
         messages.put(1L, new Message(1L, "Hello World", "Mykola"));
         messages.put(2L, new Message(2L, "Hello Jersey", "Mykola"));
+
+        profiles.put("nickdemianchuk", new Profile(1L, "nickdemianchuk", "Mykola", "Demianchuk"));
     }
 
     public static Map<Long, Message> getMessages() {
         return messages;
     }
 
-    public static Map<Long, Profile> getProfiles() {
+    public static Map<String, Profile> getProfiles() {
         return profiles;
     }
 }
