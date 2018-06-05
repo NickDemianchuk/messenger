@@ -1,7 +1,7 @@
 package com.demianchuk.messenger.resources;
 
 import com.demianchuk.messenger.models.Message;
-import com.demianchuk.messenger.service.MessageService;
+import com.demianchuk.messenger.services.MessageService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,7 +15,15 @@ public class MessageResource {
     private MessageService messageService = new MessageService();
 
     @GET
-    public List<Message> getMessages() {
+    public List<Message> getMessages(@QueryParam("year") int year,
+                                     @QueryParam("offset") int offset,
+                                     @QueryParam("size") int size) {
+        if(year > 0)
+            return messageService.getAllMessagesForYear(year);
+
+        if(offset >= 0 && size >= 0)
+            return messageService.getPaginatedMessages(offset, size);
+
         return messageService.getAllMessages();
     }
 
