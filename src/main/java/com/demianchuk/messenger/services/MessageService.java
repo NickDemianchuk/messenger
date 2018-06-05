@@ -3,10 +3,7 @@ package com.demianchuk.messenger.services;
 import com.demianchuk.messenger.database.DatabaseClass;
 import com.demianchuk.messenger.models.Message;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MessageService {
@@ -30,20 +27,15 @@ public class MessageService {
         return messagesForYear;
     }
 
-    public List<Message> getPaginatedMessages(int offset, int size) {
-        List<Message> list = new ArrayList<>(messages.values());
-        if (offset + size > list.size())
-            return new ArrayList<>();
-        return list.subList(offset, offset + size);
-    }
-
     public Message getMessage(long id) {
         return messages.get(id);
     }
 
     public Message addMessage(Message message) {
         message.setId(messages.size() + 1);
-        return messages.put(message.getId(), message);
+        message.setCreated(new Date());
+        messages.put(message.getId(), message);
+        return message;
     }
 
     public Message updateMessage(Message message) {

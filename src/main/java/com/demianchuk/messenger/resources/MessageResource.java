@@ -15,15 +15,9 @@ public class MessageResource {
     private MessageService messageService = new MessageService();
 
     @GET
-    public List<Message> getMessages(@QueryParam("year") int year,
-                                     @QueryParam("offset") int offset,
-                                     @QueryParam("size") int size) {
+    public List<Message> getMessages(@QueryParam("year") int year) {
         if(year > 0)
             return messageService.getAllMessagesForYear(year);
-
-        if(offset >= 0 && size >= 0)
-            return messageService.getPaginatedMessages(offset, size);
-
         return messageService.getAllMessages();
     }
 
@@ -50,4 +44,14 @@ public class MessageResource {
     public Message removeMessage(@PathParam("messageId") long messageId) {
         return messageService.removeMessage(messageId);
     }
+
+    @Path("/{messageId}/comments")
+    public CommentResource getCommentResource() {
+        return new CommentResource();
+    }
+
+//    @Path("/{messageId}/likes")
+//    public LikeResource getLikeResource() {
+//        return new LikeResource();
+//    }
 }
