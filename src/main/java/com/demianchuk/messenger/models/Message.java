@@ -1,19 +1,26 @@
 package com.demianchuk.messenger.models;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+@XmlRootElement
 public class Message {
 
     private long id;
-    private String message;
+    private String messageContent;
+    //TODO switch from Date to Time
     private Date created;
     private String author;
+    private Map<Long, Comment> comments = new HashMap<>();
 
     public Message () {}
 
-    public Message(long id, String message, String author) {
+    public Message(long id, String messageContent, String author) {
         this.id = id;
-        this.message = message;
+        this.messageContent = messageContent;
         this.created = new Date();
         this.author = author;
     }
@@ -26,12 +33,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessageContent() {
+        return messageContent;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
     }
 
     public Date getCreated() {
@@ -48,5 +55,14 @@ public class Message {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @XmlTransient
+    public Map<Long, Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Map<Long, Comment> comments) {
+        this.comments = comments;
     }
 }
