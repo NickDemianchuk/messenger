@@ -1,7 +1,7 @@
 package com.demianchuk.messenger.resources;
 
 import com.demianchuk.messenger.models.Profile;
-import com.demianchuk.messenger.service.ProfileService;
+import com.demianchuk.messenger.services.ProfileService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
