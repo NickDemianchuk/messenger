@@ -2,6 +2,7 @@ package com.demianchuk.messenger.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +12,7 @@ public class Message {
 
     private long id;
     private String messageContent;
-    //TODO switch from Date to Time
-    private Date created;
+    private LocalDateTime created;
     private String author;
     private Map<Long, Comment> comments = new HashMap<>();
     private Map<Long, Like> likes = new HashMap<>();
@@ -22,7 +22,7 @@ public class Message {
     public Message(long id, String messageContent, String author) {
         this.id = id;
         this.messageContent = messageContent;
-        this.created = new Date();
+        this.created = LocalDateTime.now();
         this.author = author;
     }
 
@@ -42,11 +42,11 @@ public class Message {
         this.messageContent = messageContent;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 

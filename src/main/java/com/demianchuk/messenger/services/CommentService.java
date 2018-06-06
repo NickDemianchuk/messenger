@@ -4,6 +4,7 @@ import com.demianchuk.messenger.database.DatabaseClass;
 import com.demianchuk.messenger.models.Comment;
 import com.demianchuk.messenger.models.Message;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ public class CommentService {
     public Comment addComment(long messageId, Comment comment) {
         Map<Long, Comment> comments = this.getComments(messageId);
         comment.setId(comments.size() + 1);
-        comment.setCreated(new Date());
+        comment.setCreated(LocalDateTime.now());
         comments.put(comment.getId(), comment);
         return comment;
     }

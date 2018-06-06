@@ -3,6 +3,7 @@ package com.demianchuk.messenger.services;
 import com.demianchuk.messenger.database.DatabaseClass;
 import com.demianchuk.messenger.models.Message;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,10 +20,7 @@ public class MessageService {
         List<Message> messagesForYear =
                 messages.values()
                         .stream()
-                        .filter(m -> {
-                            calendar.setTime(m.getCreated());
-                            return calendar.get(Calendar.YEAR) == year;
-                        })
+                        .filter(m -> m.getCreated().getYear() == year)
                         .collect(Collectors.toList());
         return messagesForYear;
     }
@@ -33,7 +31,7 @@ public class MessageService {
 
     public Message addMessage(Message message) {
         message.setId(messages.size() + 1);
-        message.setCreated(new Date());
+        message.setCreated(LocalDateTime.now());
         messages.put(message.getId(), message);
         return message;
     }

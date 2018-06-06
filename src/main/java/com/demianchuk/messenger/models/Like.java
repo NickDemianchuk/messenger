@@ -1,19 +1,20 @@
 package com.demianchuk.messenger.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Like {
 
     private long id;
     private String author;
-    private Date created;
+    private LocalDateTime created;
 
     public Like() {}
 
     public Like(long id, String author) {
         this.id = id;
         this.author = author;
-        this.created = new Date();
+        this.created = LocalDateTime.now();
     }
 
     public long getId() {
@@ -32,11 +33,11 @@ public class Like {
         this.author = author;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 }
