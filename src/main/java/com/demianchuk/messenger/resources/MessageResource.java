@@ -50,8 +50,8 @@ public class MessageResource {
         return new CommentResource();
     }
 
-//    @Path("/{messageId}/likes")
-//    public LikeResource getLikeResource() {
-//        return new LikeResource();
-//    }
+    @Path("/{messageId}/likes")
+    public LikeResource getLikeResource() {
+        return new LikeResource();
+    }
 }

@@ -15,6 +15,7 @@ public class Message {
     private Date created;
     private String author;
     private Map<Long, Comment> comments = new HashMap<>();
+    private Map<Long, Like> likes = new HashMap<>();
 
     public Message () {}
 
@@ -64,5 +65,14 @@ public class Message {
 
     public void setComments(Map<Long, Comment> comments) {
         this.comments = comments;
+    }
+
+    @XmlTransient
+    public Map<Long, Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Map<Long, Like> likes) {
+        this.likes = likes;
     }
 }
