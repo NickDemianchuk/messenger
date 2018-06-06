@@ -1,12 +1,12 @@
 package com.demianchuk.messenger.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Comment {
 
     private long id;
     private String commentContent;
-    private Date created;
+    private LocalDateTime created;
     private String author;
 
     public Comment() {}
@@ -15,7 +15,7 @@ public class Comment {
         this.id = id;
         this.commentContent = commentContent;
         this.author = author;
-        this.created = new Date();
+        this.created = LocalDateTime.now();
     }
 
     public long getId() {
@@ -34,11 +34,11 @@ public class Comment {
         this.commentContent = commentContent;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 

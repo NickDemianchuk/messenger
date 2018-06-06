@@ -1,7 +1,8 @@
 package com.demianchuk.messenger.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 @XmlRootElement
 public class Profile {
@@ -10,7 +11,7 @@ public class Profile {
     private String profileName;
     private String firstName;
     private String lastName;
-    private Date created;
+    private LocalDateTime created;
 
     public Profile() {}
 
@@ -19,7 +20,7 @@ public class Profile {
         this.profileName = profileName;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.created = new Date();
+        this.created = LocalDateTime.now();
     }
 
     public long getId() {
@@ -54,11 +55,11 @@ public class Profile {
         this.lastName = lastName;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 }

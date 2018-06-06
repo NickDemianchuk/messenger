@@ -5,8 +5,8 @@ import com.demianchuk.messenger.database.DatabaseClass;
 import com.demianchuk.messenger.models.Like;
 import com.demianchuk.messenger.models.Message;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,7 +40,7 @@ public class LikeService {
     public Like addLike(long messageId, Like like) {
         Map<Long, Like> likes = this.getLikes(messageId);
         like.setId(likes.size() + 1);
-        like.setCreated(new Date());
+        like.setCreated(LocalDateTime.now());
         likes.put(like.getId(), like);
         return like;
     }
