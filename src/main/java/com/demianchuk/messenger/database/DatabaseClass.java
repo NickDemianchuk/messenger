@@ -15,7 +15,7 @@ public class DatabaseClass {
         messages.put(1L, new Message(1L, "Hello World", "Mykola"));
         messages.put(2L, new Message(2L, "Hello Jersey", "Mykola"));
 
-        profiles.put("nickdemianchuk", new Profile(1L, "nickdemianchuk", "Mykola", "Demianchuk"));
+        profiles.put("nickdemianchuk", new Profile("nickdemianchuk", "Mykola", "Demianchuk"));
     }
 
     public static Map<Long, Message> getMessages() {
