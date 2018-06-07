@@ -4,7 +4,8 @@ import com.demianchuk.messenger.models.Message;
 import com.demianchuk.messenger.services.MessageService;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.*;
+import java.net.URI;
 import java.util.List;
 
 @Path("/messages")
@@ -15,34 +16,44 @@ public class MessageResource {
     private MessageService messageService = new MessageService();
 
     @GET
-    public List<Message> getMessages(@QueryParam("year") int year) {
+    public Response getMessages(@QueryParam("year") int year) {
+        List<Message> messages;
         if(year > 0)
-            return messageService.getAllMessagesForYear(year);
-        return messageService.getAllMessages();
+            messages = messageService.getAllMessagesForYear(year);
+        else
+            messages = messageService.getAllMessages();
+        GenericEntity<List<Message>> entity = new GenericEntity<List<Message>>(messages){};
+        return Response.ok(entity).build();
     }
 
     @GET
     @Path("/{messageId}")
-    public Message getMessage(@PathParam("messageId") long messageId) {
-        return messageService.getMessage(messageId);
+    public Response getMessage(@PathParam("messageId") long messageId) {
+        Message message = messageService.getMessage(messageId);
+        return Response.ok(message).build();
     }
 
     @POST
-    public Message addMessage(Message message) {
-        return messageService.addMessage(message);
+    public Response addMessage(Message message, @Context UriInfo uriInfo) {
+        Message newMessage = messageService.addMessage(message);
+        String newId = String.valueOf(newMessage.getId());
+        URI uri = uriInfo.getAbsolutePathBuilder().path(newId).build();
+        return Response.created(uri).entity(newMessage).build();
     }
 
     @PUT
     @Path("/{messageId}")
-    public Message updateMessage(@PathParam("messageId") long messageId, Message message) {
+    public Response updateMessage(@PathParam("messageId") long messageId, Message message) {
         message.setId(messageId);
-        return messageService.updateMessage(message);
+        Message newMessage = messageService.updateMessage(message);
+        return Response.accepted(newMessage).build();
     }
 
     @DELETE
     @Path("/{messageId}")
-    public Message removeMessage(@PathParam("messageId") long messageId) {
-        return messageService.removeMessage(messageId);
+    public Response removeMessage(@PathParam("messageId") long messageId) {
+        Message deletedMessage = messageService.removeMessage(messageId);
+        return Response.ok(deletedMessage).build();
     }
 
     @Path("/{messageId}/comments")
