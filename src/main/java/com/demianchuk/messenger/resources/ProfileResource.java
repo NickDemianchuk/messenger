@@ -4,8 +4,10 @@ import com.demianchuk.messenger.models.Profile;
 import com.demianchuk.messenger.services.ProfileService;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.*;
+import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @Path("/profiles")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -15,31 +17,39 @@ public class ProfileResource {
     private ProfileService profileService = new ProfileService();
 
     @GET
-    public List<Profile> getProfiles() {
-        return profileService.getAllProfiles();
+    public Response getProfiles() {
+        List<Profile> profiles = profileService.getAllProfiles();
+        GenericEntity<List<Profile>> entity = new GenericEntity<List<Profile>>(profiles){};
+        return Response.ok(entity).build();
     }
 
     @GET
     @Path("/{profileName}")
-    public Profile getProfile(@PathParam("profileName") String profileName) {
-        return profileService.getProfile(profileName);
+    public Response getProfile(@PathParam("profileName") String profileName) {
+        Profile profile = profileService.getProfile(profileName);
+        return Response.ok(profile).build();
     }
 
     @POST
-    public Profile addProfile(Profile profile) {
-        return profileService.addProfile(profile);
+    public Response addProfile(Profile profile, @Context UriInfo uriInfo) {
+        Profile newProfile = profileService.addProfile(profile);
+        String newProfileName = newProfile.getProfileName();
+        URI uri = uriInfo.getAbsolutePathBuilder().path(newProfileName).build();
+        return Response.created(uri).entity(newProfile).build();
     }
 
     @PUT
     @Path("/{profileName}")
-    public Profile updateProfile(@PathParam("profileName") String profileName, Profile profile) {
+    public Response updateProfile(@PathParam("profileName") String profileName, Profile profile) {
         profile.setProfileName(profileName);
-        return profileService.updateProfile(profile);
+        Profile updatedProfile = profileService.updateProfile(profile);
+        return Response.accepted(updatedProfile).build();
     }
 
     @DELETE
     @Path("/{profileName}")
-    public Profile removeProfile(@PathParam("profileName") String profileName) {
-        return profileService.removeProfile(profileName);
+    public Response removeProfile(@PathParam("profileName") String profileName) {
+        Profile deletedProfile = profileService.removeProfile(profileName);
+        return Response.ok(deletedProfile).build();
     }
 }
