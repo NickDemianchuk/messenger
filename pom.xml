@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.demianchuk</groupId>
-    <artifactId>messenger-app</artifactId>
+    <artifactId>messenger</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>messenger-app</name>
+    <name>messenger</name>
 
     <build>
         <finalName>messenger-app</finalName>
@@ -18,8 +18,8 @@
                 <version>2.5.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -50,7 +50,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <jersey.version>2.16</jersey.version>
+        <jersey.version>2.27</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
