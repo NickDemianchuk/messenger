@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @XmlRootElement
 public class Profile {
 
-    private long id;
     private String profileName;
     private String firstName;
     private String lastName;
@@ -15,20 +14,11 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(long id, String profileName, String firstName, String lastName) {
-        this.id = id;
+    public Profile( String profileName, String firstName, String lastName) {
         this.profileName = profileName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.created = LocalDateTime.now();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getProfileName() {
