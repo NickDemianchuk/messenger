@@ -46,9 +46,10 @@ public class CommentService {
     }
 
     public Comment updateComment(long messageId, Comment comment) {
-        Map<Long, Comment> comments = this.getComments(messageId);
         if(comment.getId() <= 0)
             return null;
+        comment.setCreated(LocalDateTime.now());
+        Map<Long, Comment> comments = this.getComments(messageId);
         comments.put(comment.getId(), comment);
         return comment;
     }

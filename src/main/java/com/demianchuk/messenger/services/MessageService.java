@@ -16,7 +16,6 @@ public class MessageService {
     }
 
     public List<Message> getAllMessagesForYear(int year) {
-        Calendar calendar = Calendar.getInstance();
         List<Message> messagesForYear =
                 messages.values()
                         .stream()
@@ -39,6 +38,7 @@ public class MessageService {
     public Message updateMessage(Message message) {
         if(message.getId() <= 0)
             return null;
+        message.setCreated(LocalDateTime.now());
         messages.put(message.getId(), message);
         return message;
     }

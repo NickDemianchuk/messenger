@@ -21,15 +21,15 @@ public class ProfileService {
     }
 
     public Profile addProfile(Profile profile) {
-        profile.setId(profiles.size() + 1);
         profile.setCreated(LocalDateTime.now());
         profiles.put(profile.getProfileName(), profile);
         return profile;
     }
 
     public Profile updateProfile(Profile profile) {
-        if(profile.getId() <= 0)
+        if(profile.getProfileName().isEmpty())
             return null;
+        profile.setCreated(LocalDateTime.now());
         profiles.put(profile.getProfileName(), profile);
         return profile;
     }
